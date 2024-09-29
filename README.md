@@ -1,5 +1,10 @@
 # Stocks Monitor App
 
+## Stack for this project
+
+- Java 21
+- Spring Boot 3
+
 ## Features to implement
 
 ### Stocks from my wallet
@@ -77,3 +82,12 @@ Whenever the DailyStockPricesUpdated was triggered
 
 #### % gain/loss in the last week - Check weekly
 Create a weekly job to runs every friday in the evening 4PM BRT
+- Go to WalletTable and for each stock in this table
+- Get the price from 7 days before today and compute gain/loss comparing with today's price: BBAS3=+7.5%; VALE3=-8.3%, etc
+- Send this report by email
+
+#### % gain/loss in the last month - Check monthly
+Create a weekly job to runs every month in the first friday in the evening 4PM BRT
+- Go to WalletTable and for each stock in this table
+- Get the price from 30 days before today and compute gain/loss comparing with today's price: PRIO3=+20.5%; RRRP3=-1.3%, etc
+- Send this report by email
