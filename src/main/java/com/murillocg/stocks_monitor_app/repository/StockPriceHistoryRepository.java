@@ -1,20 +1,12 @@
 package com.murillocg.stocks_monitor_app.repository;
 
 import com.murillocg.stocks_monitor_app.entity.StockPriceHistory;
-import org.springframework.stereotype.Service;
+import com.murillocg.stocks_monitor_app.entity.StockPriceHistoryId;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+@Repository
+public interface StockPriceHistoryRepository extends MongoRepository<StockPriceHistory, StockPriceHistoryId> {
 
-@Service
-public class StockPriceHistoryRepository {
-
-    public void save(StockPriceHistory stockPriceHistory) {
-
-    }
-
-    public Optional<StockPriceHistory> findByKey(Long id) {
-
-        return Optional.empty();
-    }
 
 }

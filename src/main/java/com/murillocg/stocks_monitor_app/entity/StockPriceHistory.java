@@ -1,6 +1,13 @@
 package com.murillocg.stocks_monitor_app.entity;
 
-import java.time.LocalDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public record StockPriceHistory(LocalDate date, String symbol, double price) {
+@Document(collection = "stock_price_history")
+public record StockPriceHistory(
+    @Id
+    StockPriceHistoryId id,
+    double price,
+    String currency
+) {
 }

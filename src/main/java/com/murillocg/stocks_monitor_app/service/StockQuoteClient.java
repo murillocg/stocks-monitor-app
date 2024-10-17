@@ -12,7 +12,7 @@ import java.net.http.HttpResponse;
 @Service
 public class StockQuoteClient {
 
-    private static final String API_URL = "https://brapi.dev/api/quote/{symbol}?token=3qyemYd8DskkvdfJKy7ePX";
+    private static final String API_URL = "https://brapi.dev/api/quote/{symbol}?token=myv1Qc5WW3AJU7nmr9nvdE";
 
     public StockQuote getQuote(String symbol) {
         String url = API_URL.replace("{symbol}", symbol);
@@ -31,7 +31,7 @@ public class StockQuoteClient {
 
             // Check response status code
             if (response.statusCode() != 200) {
-                throw new RuntimeException("Error while requesting the stock quote");
+                throw new RuntimeException("Error while requesting the stock quote. StatusCode: " + response.statusCode());
             }
             // Parse JSON response
             JSONObject json = new JSONObject(response.body());

@@ -16,7 +16,7 @@ public class WatchlistStocksRepository {
             "BPAN4",
             "OIBR3",
             "POMO4",
-            "PSSA4"
+            "PSSA3"
     );
 
     public Set<String> getAllStocks() {
