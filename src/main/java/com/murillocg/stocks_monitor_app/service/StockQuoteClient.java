@@ -12,7 +12,8 @@ import java.net.http.HttpResponse;
 @Service
 public class StockQuoteClient {
 
-    private static final String API_URL = "https://brapi.dev/api/quote/{symbol}?token=myv1Qc5WW3AJU7nmr9nvdE";
+    //TODO: Make that a environment variable
+    private static final String API_URL = "https://brapi.dev/api/quote/{symbol}?token=myv1Qc5WW3AJU7nmr9nvd5";
 
     public StockQuote getQuote(String symbol) {
         String url = API_URL.replace("{symbol}", symbol);
