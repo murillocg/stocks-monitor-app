@@ -1,8 +1,7 @@
 package com.murillocg.stocks_monitor_app.repository;
 
-import org.springframework.stereotype.Service;
-
 import java.util.Set;
+import org.springframework.stereotype.Service;
 
 @Service
 public class WalletStocksRepository {

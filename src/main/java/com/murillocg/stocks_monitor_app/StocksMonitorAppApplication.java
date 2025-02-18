@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class StocksMonitorAppApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(StocksMonitorAppApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(StocksMonitorAppApplication.class, args);
+    }
 
 }

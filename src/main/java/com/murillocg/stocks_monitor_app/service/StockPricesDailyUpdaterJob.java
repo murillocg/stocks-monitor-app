@@ -9,17 +9,16 @@ import com.murillocg.stocks_monitor_app.repository.StockKeyPricesRepository;
 import com.murillocg.stocks_monitor_app.repository.StockPriceHistoryRepository;
 import com.murillocg.stocks_monitor_app.repository.WalletStocksRepository;
 import com.murillocg.stocks_monitor_app.repository.WatchlistStocksRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
 @Service
 public class StockPricesDailyUpdaterJob {
@@ -38,9 +37,11 @@ public class StockPricesDailyUpdaterJob {
 
     private final StockKeyPricesRepository stockKeyPricesRepository;
 
-    public StockPricesDailyUpdaterJob(WalletStocksRepository walletStocksRepository, WatchlistStocksRepository watchlistStocksRepository,
-                                      StockQuoteClient stockQuoteClient, ApplicationEventPublisher applicationEventPublisher,
-                                      StockPriceHistoryRepository stockPriceHistoryRepository, StockKeyPricesRepository stockKeyPricesRepository) {
+    public StockPricesDailyUpdaterJob(WalletStocksRepository walletStocksRepository,
+            WatchlistStocksRepository watchlistStocksRepository, StockQuoteClient stockQuoteClient,
+            ApplicationEventPublisher applicationEventPublisher,
+            StockPriceHistoryRepository stockPriceHistoryRepository,
+            StockKeyPricesRepository stockKeyPricesRepository) {
         this.walletStocksRepository = walletStocksRepository;
         this.watchlistStocksRepository = watchlistStocksRepository;
         this.stockQuoteClient = stockQuoteClient;
@@ -63,12 +64,12 @@ public class StockPricesDailyUpdaterJob {
 
             StockQuote stockQuote = stockQuoteClient.getQuote(stock);
 
-            //Add the stock price in the stock price history table
+            // Add the stock price in the stock price history table
             var id = new StockPriceHistoryId(stock, LocalDate.now());
             StockPriceHistory stockPriceHistory = new StockPriceHistory(id, stockQuote.price(), "BRL");
             stockPriceHistoryRepository.save(stockPriceHistory);
 
-            //Update the highest price
+            // Update the highest price
             Optional<StockKeyPrices> keyPricesOpt = stockKeyPricesRepository.findById(stock);
             if (keyPricesOpt.isEmpty()) {
                 var stockKeyPrices = new StockKeyPrices(stock, stockQuote.price(), 0.0, null, 999.99, null);
@@ -98,14 +99,8 @@ public class StockPricesDailyUpdaterJob {
             newLowPriceDate = todayDate;
         }
 
-        var newKeyPrices = new StockKeyPrices(
-                existingKeyPrices.symbol(),
-                todayPrice,
-                newHighPrice,
-                newHighPriceDate,
-                newLowPrice,
-                newLowPriceDate
-        );
+        var newKeyPrices = new StockKeyPrices(existingKeyPrices.symbol(), todayPrice, newHighPrice, newHighPriceDate,
+                newLowPrice, newLowPriceDate);
         stockKeyPricesRepository.save(newKeyPrices);
     }
 

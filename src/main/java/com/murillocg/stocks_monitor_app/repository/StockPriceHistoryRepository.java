@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StockPriceHistoryRepository extends MongoRepository<StockPriceHistory, StockPriceHistoryId> {
 
-
 }

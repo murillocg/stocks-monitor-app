@@ -3,12 +3,11 @@ package com.murillocg.stocks_monitor_app.report;
 import com.murillocg.stocks_monitor_app.entity.StockPriceHistoryId;
 import com.murillocg.stocks_monitor_app.repository.StockPriceHistoryRepository;
 import com.murillocg.stocks_monitor_app.repository.WalletStocksRepository;
+import java.time.LocalDate;
+import java.util.HashSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
-import java.util.HashSet;
 
 @Component
 public class ReportPricesComparator {
@@ -19,7 +18,7 @@ public class ReportPricesComparator {
     private final StockPriceHistoryRepository stockPriceHistoryRepository;
 
     public ReportPricesComparator(WalletStocksRepository walletStocksRepository,
-                                  StockPriceHistoryRepository stockPriceHistoryRepository) {
+            StockPriceHistoryRepository stockPriceHistoryRepository) {
         this.walletStocksRepository = walletStocksRepository;
         this.stockPriceHistoryRepository = stockPriceHistoryRepository;
     }
@@ -48,12 +47,14 @@ public class ReportPricesComparator {
 
         var comparisonDate = today.minusDays(comparisonDays);
         var oldStockPrice = stockPriceHistoryRepository.findById(new StockPriceHistoryId(stock, comparisonDate))
-                .orElseThrow(() -> new RuntimeException("Stock price history not found for " + comparisonDays + " days ago!"));
+                .orElseThrow(() -> new RuntimeException(
+                        "Stock price history not found for " + comparisonDays + " days ago!"));
 
         var earnings = ((todayStockPrice.price() / oldStockPrice.price()) - 1) * 100;
         return new ReportRecord(stock, oldStockPrice.price(), todayStockPrice.price(), earnings);
     }
 
-    public record ReportRecord(String symbol, double lastPrice, double currentPrice, double earnings) {}
+    public record ReportRecord(String symbol, double lastPrice, double currentPrice, double earnings) {
+    }
 
 }
