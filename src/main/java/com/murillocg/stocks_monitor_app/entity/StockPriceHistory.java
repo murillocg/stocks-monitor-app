@@ -5,9 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "stock_price_history")
 public record StockPriceHistory(
-    @Id
-    StockPriceHistoryId id,
-    double price,
-    String currency
-) {
+        @Id StockPriceHistoryId id,
+        double price,
+        String currency) {
 }

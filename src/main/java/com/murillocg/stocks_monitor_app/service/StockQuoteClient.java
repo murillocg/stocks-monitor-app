@@ -30,7 +30,8 @@ public class StockQuoteClient {
             // Check response status code
             if (response.statusCode() != 200) {
                 throw new RuntimeException(
-                        "Error while requesting the stock quote. StatusCode: " + response.statusCode());
+                        "Error while requesting the stock quote. StatusCode: " + response.statusCode()
+                );
             }
             // Parse JSON response
             JSONObject json = new JSONObject(response.body());
@@ -39,8 +40,7 @@ public class StockQuoteClient {
             double quotePrice = quote.getDouble("regularMarketPrice");
 
             return new StockQuote(quoteSymbol, quotePrice);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException("Error while requesting the stock quote", e);
         }
     }

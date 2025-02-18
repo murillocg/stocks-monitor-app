@@ -40,7 +40,9 @@ public class StocksInBigFallDailyReport implements ApplicationListener<StockPric
         var myStocks = walletStocksRepository.getAllStocks();
         for (String stock : myStocks) {
             var prices = stockKeyPricesRepository.findById(stock).orElseThrow(
-                    () -> new RuntimeException("Stock not found in the stockKeyPriceRepository: " + stock));
+                                                                              () -> new RuntimeException(
+                                                                                      "Stock not found in the stockKeyPriceRepository: "
+                                                                                              + stock));
 
             if (prices.todayPrice() < prices.highPrice()) {
                 double earnings = earningsCalculator.calculateInPercentage(prices.todayPrice(), prices.highPrice());
